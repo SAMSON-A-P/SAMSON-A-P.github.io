@@ -8,11 +8,13 @@
 <meta name="keywords" content="Samson, Data Analyst, AIML Engineer, AI ML Engineer, Data Analytics, Machine Learning Engineer, VDART, Python Developer, SQL, Power BI, Data Science Portfolio">
 <meta name="author" content="Samson">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://samson-a-p.github.io/">
 
 <!-- Open Graph / social preview -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Samson | Data Analyst & AIML Engineer Portfolio">
 <meta property="og:description" content="AI/ML graduate and Data Analyst with hands-on experience from a Data Analytics internship at VDART. Skilled in Python, SQL, Machine Learning, and Power BI.">
+<meta property="og:url" content="https://samson-a-p.github.io/">
 <meta property="og:site_name" content="Samson Portfolio">
 
 <meta name="twitter:card" content="summary">
@@ -26,6 +28,7 @@
   "name": "Samson",
   "jobTitle": "Data Analyst / AIML Engineer",
   "description": "AI/ML graduate and Data Analyst with a Data Analytics internship at VDART, skilled in Python, SQL, Machine Learning, and data visualization.",
+  "url": "https://samson-a-p.github.io/",
   "knowsAbout": ["Data Analytics", "Machine Learning", "Python", "SQL", "Power BI", "Artificial Intelligence"],
   "alumniOf": "Your College Name",
   "worksFor": {
@@ -38,6 +41,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root{
     --bg: #0B1120;
@@ -482,6 +486,74 @@
     .navlinks{ display:none; }
     .timeline-item{ grid-template-columns:1fr; gap:10px; }
   }
+
+  /* ---------- Admin panel ---------- */
+  .admin-fab{
+    position: fixed; bottom: 26px; right: 26px; z-index: 200;
+    background: var(--violet); color:#fff; border:none;
+    font-family: var(--font-mono); font-size:0.8rem; font-weight:600;
+    padding: 14px 20px; border-radius: 30px; cursor:pointer;
+    box-shadow: 0 10px 30px rgba(108,92,231,0.5);
+  }
+  .admin-overlay{
+    position: fixed; inset:0; z-index: 300;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    padding: 20px;
+  }
+  .admin-modal{
+    background: var(--bg-panel); border:1px solid var(--line);
+    border-radius: 16px; width: 100%; max-width: 640px; max-height: 85vh;
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  .admin-modal-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 18px 22px; border-bottom:1px solid var(--line);
+    font-family: var(--font-display); font-weight:600; font-size:1.05rem;
+  }
+  .admin-close{
+    background:none; border:none; color: var(--muted); font-size:1.1rem; cursor:pointer;
+  }
+  .admin-tabs{ display:flex; gap:6px; padding: 14px 22px 0; }
+  .admin-tab{
+    background: none; border: 1px solid var(--line); color: var(--muted);
+    font-family: var(--font-mono); font-size:0.78rem; padding: 8px 16px;
+    border-radius: 8px 8px 0 0; cursor:pointer;
+  }
+  .admin-tab.active{ background: var(--bg-panel-2); color: var(--text); border-bottom-color: var(--bg-panel-2); }
+  .admin-panel-body{ padding: 20px 22px; overflow-y:auto; flex:1; }
+  .admin-list{ display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+  .admin-list-item{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:10px;
+    background: var(--bg-panel-2); border:1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px; font-size:0.85rem;
+  }
+  .admin-list-item .li-text b{ font-family: var(--font-display); }
+  .admin-list-item .li-text p{ color: var(--muted); font-size:0.8rem; margin-top:4px; }
+  .admin-del-btn{
+    background: var(--coral); color:#0B1120; border:none; border-radius:6px;
+    width:26px; height:26px; flex-shrink:0; cursor:pointer; font-weight:700;
+  }
+  .admin-form{ display:flex; flex-direction:column; gap:10px; border-top:1px dashed var(--line); padding-top:18px; }
+  .admin-form input, .admin-form textarea, .admin-form select{
+    background: var(--bg); border:1px solid var(--line); border-radius:8px;
+    padding: 10px 12px; color: var(--text); font-family: var(--font-body); font-size:0.88rem;
+  }
+  .admin-form textarea{ min-height: 70px; resize:vertical; }
+  .admin-add-btn{
+    background: var(--mint); color:#0B1120; border:none; border-radius:8px;
+    padding: 11px; font-family: var(--font-mono); font-weight:700; font-size:0.82rem; cursor:pointer;
+  }
+  .admin-modal-foot{
+    padding: 16px 22px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .admin-hint{ font-size:0.7rem; color: var(--muted); font-family: var(--font-mono); max-width:32ch; }
+  .admin-download-btn{
+    background: var(--yellow); color:#0B1120; border:none; border-radius:8px;
+    padding: 11px 18px; font-family: var(--font-mono); font-weight:700; font-size:0.82rem; cursor:pointer;
+    white-space:nowrap;
+  }
 </style>
 </head>
 <body>
@@ -490,7 +562,7 @@
 
 <header>
   <nav class="wrap">
-    <div class="logo"><span class="dot"></span> SAMSON</div>
+    <div class="logo" id="logoTrigger" style="cursor:default;"><span class="dot"></span> SAMSON</div>
     <ul class="navlinks">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -576,28 +648,9 @@
         <span class="section-num">02</span>
         <h2 class="section-title">Where I've <span class="accent">Worked</span></h2>
       </div>
-      <div data-reveal>
-        <div class="timeline-item">
-          <div class="t-date">INTERNSHIP</div>
-          <div>
-            <div class="t-role">Data Analytics Intern</div>
-            <div class="t-org">VDART</div>
-            <p class="t-desc">
-              Worked on real-world data analytics tasks — collecting and cleaning data, building analysis workflows,
-              and presenting findings to support decision-making. Gained hands-on exposure to how analytics work
-              functions inside a real organization.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Data Cleaning</span>
-              <span class="tag">Reporting</span>
-              <span class="tag">Data Visualization</span>
-              <span class="tag">Excel / SQL</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div id="timelineContainer" data-reveal></div>
       <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); margin-top:18px;">
-        * Add exact dates and more detail here once you share them — this is a placeholder structure.
+        * Use the admin panel to add more internships or update details.
       </p>
     </div>
   </section>
@@ -649,33 +702,7 @@
         <span class="section-num">04</span>
         <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
       </div>
-      <div class="proj-note">✎ Placeholder projects below — swap these for your actual AIML course / internship projects when ready.</div>
-      <div class="proj-grid" data-reveal>
-        <div class="proj-card">
-          <div class="proj-icon">01</div>
-          <h3>Sales Trend Dashboard</h3>
-          <p>An interactive dashboard analyzing sales data to surface trends, seasonality, and top-performing segments.</p>
-          <div class="proj-tags">
-            <span class="tag">Power BI</span><span class="tag">SQL</span>
-          </div>
-        </div>
-        <div class="proj-card">
-          <div class="proj-icon">02</div>
-          <h3>Customer Churn Prediction</h3>
-          <p>A machine learning model built to predict customer churn using classification algorithms and feature engineering.</p>
-          <div class="proj-tags">
-            <span class="tag">Python</span><span class="tag">Scikit-learn</span>
-          </div>
-        </div>
-        <div class="proj-card">
-          <div class="proj-icon">03</div>
-          <h3>Exploratory Data Analysis</h3>
-          <p>End-to-end EDA on a public dataset — cleaning, visualizing, and extracting insights to guide business decisions.</p>
-          <div class="proj-tags">
-            <span class="tag">Pandas</span><span class="tag">Matplotlib</span>
-          </div>
-        </div>
-      </div>
+      <div class="proj-grid" id="projGrid" data-reveal></div>
     </div>
   </section>
 
@@ -686,20 +713,7 @@
         <span class="section-num">05</span>
         <h2 class="section-title">Education &amp; <span class="accent">Certifications</span></h2>
       </div>
-      <div class="edu-grid" data-reveal>
-        <div class="edu-card">
-          <div class="edu-deg">B.Tech / B.E — AI &amp; Machine Learning</div>
-          <div class="edu-org">YOUR COLLEGE NAME · GRADUATION YEAR</div>
-          <p class="edu-desc">Graduated with a focus on artificial intelligence and machine learning fundamentals, including
-          algorithms, model building, and applied statistics.</p>
-        </div>
-        <div class="edu-card">
-          <div class="edu-deg">AI/ML Certification Course</div>
-          <div class="edu-org">COURSE PROVIDER · COMPLETION YEAR</div>
-          <p class="edu-desc">Completed a focused course covering machine learning concepts, hands-on model building,
-          and practical data analytics techniques.</p>
-        </div>
-      </div>
+      <div class="edu-grid" id="eduGrid" data-reveal></div>
     </div>
   </section>
 
@@ -743,6 +757,88 @@
     <span>Back to top ↑</span>
   </footer>
 </main>
+
+<!-- Admin panel (hidden until unlocked via secret click + real login) -->
+<button id="adminFab" class="admin-fab" style="display:none;" title="Manage Content">✎ Manage Content</button>
+
+<div id="loginOverlay" class="admin-overlay" style="display:none;">
+  <div class="admin-modal" style="max-width:380px;">
+    <div class="admin-modal-head">
+      <span>Admin Login</span>
+      <button id="loginClose" class="admin-close">✕</button>
+    </div>
+    <div class="admin-panel-body">
+      <div class="admin-form">
+        <input id="loginEmail" type="email" placeholder="Admin email">
+        <input id="loginPassword" type="password" placeholder="Password">
+        <button class="admin-add-btn" onclick="doLogin()">Log In</button>
+        <p id="loginError" style="color:var(--coral); font-size:0.8rem; display:none;">Incorrect email or password.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="adminOverlay" class="admin-overlay" style="display:none;">
+  <div class="admin-modal">
+    <div class="admin-modal-head">
+      <span>Manage Portfolio Content</span>
+      <button id="adminClose" class="admin-close">✕</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="projects">Projects</button>
+      <button class="admin-tab" data-tab="experience">Experience</button>
+      <button class="admin-tab" data-tab="education">Education</button>
+    </div>
+
+    <div class="admin-panel-body">
+      <!-- Projects tab -->
+      <div class="admin-tabpanel" id="tab-projects">
+        <div id="adminProjList" class="admin-list"></div>
+        <div class="admin-form">
+          <input id="pTitle" placeholder="Project title">
+          <textarea id="pDesc" placeholder="Short description"></textarea>
+          <input id="pTags" placeholder="Tags (comma separated, e.g. Python, SQL)">
+          <select id="pColor">
+            <option value="mint">Mint accent</option>
+            <option value="yellow">Yellow accent</option>
+            <option value="coral">Coral accent</option>
+          </select>
+          <button class="admin-add-btn" onclick="addProject()">+ Add Project</button>
+        </div>
+      </div>
+
+      <!-- Experience tab -->
+      <div class="admin-tabpanel" id="tab-experience" style="display:none;">
+        <div id="adminExpList" class="admin-list"></div>
+        <div class="admin-form">
+          <input id="eDate" placeholder="Label (e.g. INTERNSHIP, 2025-2026)">
+          <input id="eRole" placeholder="Role title">
+          <input id="eOrg" placeholder="Organization">
+          <textarea id="eDesc" placeholder="Description"></textarea>
+          <input id="eTags" placeholder="Tags (comma separated)">
+          <button class="admin-add-btn" onclick="addExperience()">+ Add Experience</button>
+        </div>
+      </div>
+
+      <!-- Education tab -->
+      <div class="admin-tabpanel" id="tab-education" style="display:none;">
+        <div id="adminEduList" class="admin-list"></div>
+        <div class="admin-form">
+          <input id="uDeg" placeholder="Degree / Course name">
+          <input id="uOrg" placeholder="Institution · Year">
+          <textarea id="uDesc" placeholder="Description"></textarea>
+          <button class="admin-add-btn" onclick="addEducation()">+ Add Education / Certification</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-modal-foot">
+      <span class="admin-hint">Changes save instantly to the database — visible to everyone immediately.</span>
+      <button id="signOutBtn" class="admin-download-btn">Sign Out</button>
+    </div>
+  </div>
+</div>
+
 
 <script>
   // Typing tagline effect
@@ -792,6 +888,209 @@
     });
   }, { threshold: 0.2 });
   skillIo.observe(skillSection);
+
+  /* ================= SUPABASE SETUP ================= */
+  const SUPABASE_URL = "https://zwexyumphompojevfojn.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_B9thNqUlizqg20dAmnkbIg_cjbdg8YB";
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let projectsData = [], experienceData = [], educationData = [];
+
+  const colorVar = c => `var(--${c || 'mint'})`;
+
+  async function loadAllData(){
+    const [{ data: projects }, { data: experience }, { data: education }] = await Promise.all([
+      sb.from('projects').select('*').order('id', { ascending: true }),
+      sb.from('experience').select('*').order('id', { ascending: true }),
+      sb.from('education').select('*').order('id', { ascending: true })
+    ]);
+    projectsData = projects || [];
+    experienceData = experience || [];
+    educationData = education || [];
+    renderProjects(); renderExperience(); renderEducation();
+  }
+
+  function renderProjects(){
+    const grid = document.getElementById('projGrid');
+    grid.innerHTML = projectsData.map((p, idx) => `
+      <div class="proj-card">
+        <div class="proj-icon" style="background:${colorVar(p.color)};">${String(idx+1).padStart(2,'0')}</div>
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <div class="proj-tags">${(p.tags||[]).map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    `).join('') || '<p style="color:var(--muted);">No projects yet.</p>';
+  }
+
+  function renderExperience(){
+    const container = document.getElementById('timelineContainer');
+    container.innerHTML = experienceData.map(x => `
+      <div class="timeline-item">
+        <div class="t-date">${x.date_label || ''}</div>
+        <div>
+          <div class="t-role">${x.role}</div>
+          <div class="t-org">${x.org}</div>
+          <p class="t-desc">${x.description || ''}</p>
+          <div class="tag-row">${(x.tags||[]).map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        </div>
+      </div>
+    `).join('') || '<p style="color:var(--muted);">No experience yet.</p>';
+  }
+
+  function renderEducation(){
+    const grid = document.getElementById('eduGrid');
+    grid.innerHTML = educationData.map(e => `
+      <div class="edu-card">
+        <div class="edu-deg">${e.degree}</div>
+        <div class="edu-org">${e.org}</div>
+        <p class="edu-desc">${e.description || ''}</p>
+      </div>
+    `).join('') || '<p style="color:var(--muted);">No education entries yet.</p>';
+  }
+
+  loadAllData();
+
+  /* ================= ADMIN LIST RENDERING (inside panel) ================= */
+  function renderAdminLists(){
+    document.getElementById('adminProjList').innerHTML = projectsData.map(p => `
+      <div class="admin-list-item">
+        <div class="li-text"><b>${p.title}</b><p>${p.description}</p></div>
+        <button class="admin-del-btn" onclick="deleteItem('projects', ${p.id})">✕</button>
+      </div>`).join('') || '<p style="color:var(--muted); font-size:0.8rem;">No projects yet.</p>';
+
+    document.getElementById('adminExpList').innerHTML = experienceData.map(x => `
+      <div class="admin-list-item">
+        <div class="li-text"><b>${x.role} — ${x.org}</b><p>${x.description||''}</p></div>
+        <button class="admin-del-btn" onclick="deleteItem('experience', ${x.id})">✕</button>
+      </div>`).join('') || '<p style="color:var(--muted); font-size:0.8rem;">No experience yet.</p>';
+
+    document.getElementById('adminEduList').innerHTML = educationData.map(e => `
+      <div class="admin-list-item">
+        <div class="li-text"><b>${e.degree}</b><p>${e.org}</p></div>
+        <button class="admin-del-btn" onclick="deleteItem('education', ${e.id})">✕</button>
+      </div>`).join('') || '<p style="color:var(--muted); font-size:0.8rem;">No education entries yet.</p>';
+  }
+
+  window.deleteItem = async function(table, id){
+    const { error } = await sb.from(table).delete().eq('id', id);
+    if(error){ alert('Error deleting: ' + error.message); return; }
+    await loadAllData();
+    renderAdminLists();
+  };
+
+  window.addProject = async function(){
+    const title = document.getElementById('pTitle').value.trim();
+    const description = document.getElementById('pDesc').value.trim();
+    const tags = document.getElementById('pTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+    const color = document.getElementById('pColor').value;
+    if(!title || !description){ alert('Please fill in at least a title and description.'); return; }
+    const { error } = await sb.from('projects').insert({ title, description, tags, color });
+    if(error){ alert('Error saving: ' + error.message); return; }
+    ['pTitle','pDesc','pTags'].forEach(id => document.getElementById(id).value = '');
+    await loadAllData();
+    renderAdminLists();
+  };
+
+  window.addExperience = async function(){
+    const date_label = document.getElementById('eDate').value.trim();
+    const role = document.getElementById('eRole').value.trim();
+    const org = document.getElementById('eOrg').value.trim();
+    const description = document.getElementById('eDesc').value.trim();
+    const tags = document.getElementById('eTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+    if(!role || !org){ alert('Please fill in at least a role and organization.'); return; }
+    const { error } = await sb.from('experience').insert({ date_label, role, org, description, tags });
+    if(error){ alert('Error saving: ' + error.message); return; }
+    ['eDate','eRole','eOrg','eDesc','eTags'].forEach(id => document.getElementById(id).value = '');
+    await loadAllData();
+    renderAdminLists();
+  };
+
+  window.addEducation = async function(){
+    const degree = document.getElementById('uDeg').value.trim();
+    const org = document.getElementById('uOrg').value.trim();
+    const description = document.getElementById('uDesc').value.trim();
+    if(!degree || !org){ alert('Please fill in at least a degree/course name and institution.'); return; }
+    const { error } = await sb.from('education').insert({ degree, org, description });
+    if(error){ alert('Error saving: ' + error.message); return; }
+    ['uDeg','uOrg','uDesc'].forEach(id => document.getElementById(id).value = '');
+    await loadAllData();
+    renderAdminLists();
+  };
+
+  /* ================= SECRET TRIGGER -> LOGIN ================= */
+  const loginOverlay = document.getElementById('loginOverlay');
+  const adminOverlay = document.getElementById('adminOverlay');
+  const adminFab = document.getElementById('adminFab');
+
+  let clickCount = 0, clickTimer = null;
+  document.getElementById('logoTrigger').addEventListener('click', () => {
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+    if(clickCount >= 5){
+      clickCount = 0;
+      loginOverlay.style.display = 'flex';
+    }
+  });
+
+  window.doLogin = async function(){
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    const errEl = document.getElementById('loginError');
+    if(error){
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+    loginOverlay.style.display = 'none';
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
+    adminFab.style.display = 'block';
+  };
+
+  document.getElementById('loginClose').addEventListener('click', () => {
+    loginOverlay.style.display = 'none';
+  });
+  loginOverlay.addEventListener('click', (e) => {
+    if(e.target === loginOverlay) loginOverlay.style.display = 'none';
+  });
+
+  adminFab.addEventListener('click', () => {
+    renderAdminLists();
+    adminOverlay.style.display = 'flex';
+  });
+  document.getElementById('adminClose').addEventListener('click', () => {
+    adminOverlay.style.display = 'none';
+  });
+  adminOverlay.addEventListener('click', (e) => {
+    if(e.target === adminOverlay) adminOverlay.style.display = 'none';
+  });
+
+  document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.admin-tabpanel').forEach(p => p.style.display = 'none');
+      document.getElementById('tab-' + tab.dataset.tab).style.display = 'block';
+    });
+  });
+
+  document.getElementById('signOutBtn').addEventListener('click', async () => {
+    adminOverlay.style.display = 'none';
+    adminFab.style.display = 'none';
+    try{
+      const { error } = await sb.auth.signOut();
+      if(error) console.error('Sign out error:', error.message);
+    }catch(err){
+      console.error('Sign out failed:', err);
+    }
+  });
+
+  // Restore admin session on page reload (if already logged in on this device)
+  sb.auth.getSession().then(({ data }) => {
+    if(data.session){ adminFab.style.display = 'block'; }
+  });
 </script>
 
 </body>
